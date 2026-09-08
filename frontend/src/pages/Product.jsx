@@ -4,6 +4,7 @@ import { ShopContext } from '../context/ShopContext'
 import RelatedProducts from '../components/RelatedProducts';
 import { Badge, Button, Container, cx } from '../components/ui'
 import { BagIcon, ChevronRight, RefreshIcon, ShieldIcon, StarIcon, TruckIcon } from '../components/ui/Icons'
+import cdn from '../utils/cdn'
 
 const Product = () => {
   const { productId } = useParams();
@@ -42,7 +43,7 @@ const Product = () => {
 
      
         <div className='relative aspect-[4/5] overflow-hidden rounded border border-neutral-200 bg-white shadow-sm'>
-          <img src={image} alt={productData.name} className='h-full w-full object-cover' />
+          <img src={cdn(image, 1000)} alt={productData.name} className='h-full w-full object-cover' />
           {productData.bestseller && (
             <Badge variant='volt' className='absolute left-3 top-3'>Bestseller</Badge>
           )}

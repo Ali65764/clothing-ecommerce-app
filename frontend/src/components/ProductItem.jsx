@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { ShopContext } from '../context/ShopContext'
 import { Link } from 'react-router-dom'
 import Badge from './ui/Badge'
+import cdn from '../utils/cdn'
 
 const ProductItem = ({ id, image, name, price, bestseller, category, sizes }) => {
   const { currency, } = useContext(ShopContext)
@@ -11,7 +12,7 @@ const ProductItem = ({ id, image, name, price, bestseller, category, sizes }) =>
       <div className='relative aspect-[4/5] overflow-hidden rounded border border-neutral-200 bg-white shadow-sm transition-colors group-hover:border-brand-200'>
         {image && (
           <img
-            src={image}
+            src={cdn(image, 500)}
             alt={name}
             loading='lazy'
             className='absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105'

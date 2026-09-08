@@ -103,7 +103,7 @@ const PlaceOrder = () => {
       }
     } catch (err) {
       console.log(err.message)
-      toast.error(err.message, { autoClose: 1500 })
+      toast.error(err.response?.data?.message || err.message, { autoClose: 1500 })
     }
   }
 

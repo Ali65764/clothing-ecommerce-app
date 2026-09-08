@@ -5,6 +5,7 @@ import axios from 'axios'
 import { useEffect } from 'react'
 import { Badge, Button, Container, EmptyState } from '../components/ui'
 import { PackageIcon, RefreshIcon, UserIcon } from '../components/ui/Icons'
+import cdn from '../utils/cdn'
 
 
 const statusTone = (status = '') => {
@@ -89,7 +90,7 @@ const Orders = () => {
 
                 <div className='flex min-w-0 items-start gap-4'>
                   <div className='aspect-square w-16 shrink-0 overflow-hidden rounded border border-neutral-200'>
-                    <img src={item.image} alt={item.name} className='h-full w-full object-cover' />
+                    <img src={cdn(item.image, 160)} alt={item.name} loading='lazy' className='h-full w-full object-cover' />
                   </div>
 
                   <div className='min-w-0'>

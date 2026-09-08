@@ -26,7 +26,7 @@ const Verify = () => {
             }
         } catch (err) {
             console.log(err)
-            toast.error(err.message, { autoClose: 1500 })
+            toast.error(err.response?.data?.message || err.message, { autoClose: 1500 })
         }
     }
 

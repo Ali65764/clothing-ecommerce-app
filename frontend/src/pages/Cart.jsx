@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import CartTotal from '../components/CartTotal'
 import { Button, Container, EmptyState } from '../components/ui'
 import { ArrowLeft, BagIcon, LockIcon, MinusIcon, PlusIcon, TrashIcon } from '../components/ui/Icons'
+import cdn from '../utils/cdn'
 
 const Cart = () => {
   const { products, currency, cartItems, updateQuantity, navigate } = useContext(ShopContext)
@@ -67,7 +68,7 @@ const Cart = () => {
                       to={`/product/${item._id}`}
                       className='aspect-square w-20 shrink-0 overflow-hidden rounded border border-neutral-200'
                     >
-                      <img src={productData?.image} alt={productData.name} className='h-full w-full object-cover' />
+                      <img src={cdn(productData?.image, 200)} alt={productData.name} loading='lazy' className='h-full w-full object-cover' />
                     </Link>
 
                     <div className='flex min-w-0 flex-1 flex-col gap-3 sm:flex-row sm:items-start sm:justify-between'>

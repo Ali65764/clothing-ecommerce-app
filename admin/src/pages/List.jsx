@@ -7,6 +7,7 @@ import {
   Skeleton, StatCard, Textarea, controlClass, cx,
 } from '../components/ui'
 import { EditIcon, ImageIcon, SearchIcon, SparkIcon, TrashIcon, WalletIcon } from '../components/ui/Icons'
+import cdn from '../utils/cdn'
 
 const SIZES = ['S', 'M', 'L', 'XL', 'XXL']
 
@@ -209,7 +210,7 @@ const List = ({ token }) => {
                 className='grid grid-cols-[56px_1fr_auto] items-center gap-4 px-4 py-3 hover:bg-neutral-50 md:grid-cols-[64px_3fr_1fr_1fr_96px]'
               >
                 <div className='aspect-square w-14 overflow-hidden rounded border border-neutral-200'>
-                  <img className='h-full w-full object-cover' src={item.image} alt={item.name} />
+                  <img className='h-full w-full object-cover' src={cdn(item.image, 160)} loading='lazy' alt={item.name} />
                 </div>
 
                 <div className='min-w-0'>
@@ -282,7 +283,7 @@ const List = ({ token }) => {
                 >
                   <img
                     className='h-full w-full object-cover'
-                    src={newImage ? URL.createObjectURL(newImage) : editing.image}
+                    src={newImage ? URL.createObjectURL(newImage) : cdn(editing.image, 400)}
                     alt={form.name}
                   />
                   <span className='absolute inset-0 flex items-center justify-center bg-neutral-900/50 text-sm text-white opacity-0 group-hover:opacity-100'>
@@ -419,7 +420,7 @@ const List = ({ token }) => {
         {pendingDelete && (
           <div className='flex items-center gap-4'>
             <div className='aspect-square w-14 shrink-0 overflow-hidden rounded border border-neutral-200'>
-              <img className='h-full w-full object-cover' src={pendingDelete.image} alt={pendingDelete.name} />
+              <img className='h-full w-full object-cover' src={cdn(pendingDelete.image, 160)} alt={pendingDelete.name} />
             </div>
             <div className='min-w-0'>
               <p className='truncate text-sm text-neutral-900'>{pendingDelete.name}</p>

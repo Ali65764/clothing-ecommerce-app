@@ -1,7 +1,7 @@
-import about from './about.jpg'
-import contact from './contact.jpg'
+import about from './about.webp'
+import contact from './contact.webp'
 import stripe_logo from './stripe_logo.png'
-import ecommerce from './e-commerce.jpg'
+import ecommerce from './e-commerce.webp'
 
 export const assets = {
     about,

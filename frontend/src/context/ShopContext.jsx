@@ -20,6 +20,13 @@ const ShopContextProvider = ({ children }) => {
             toast.error("Please Select Product Size!", { autoClose: 1500 });
             return;
         }
+
+        if (!token) {
+            toast.error("Please sign in to add items to your cart", { autoClose: 1500 });
+            navigate('/login')
+            return;
+        }
+
         let cartData = structuredClone(cartItems);
         if (cartData[itemId]) {
             if (cartData[itemId][size]) {
@@ -35,10 +42,13 @@ const ShopContextProvider = ({ children }) => {
 
         if (token) {
             try {
-                await axios.post(backendUrl + '/api/cart', { itemId, size }, { headers: { token } })
+                const response = await axios.post(backendUrl + '/api/cart', { itemId, size }, { headers: { token } })
+                if (!response.data.success) {
+                    toast.error(response.data.message, { autoClose: 1500 })
+                }
             } catch (err) {
                 console.log(err);
-                toast.error(err.message)
+                toast.error(err.response?.data?.message || err.message)
             }
         }
     }
@@ -60,16 +70,25 @@ const ShopContextProvider = ({ children }) => {
     }
 
     const updateQuantity = async (itemId, size, quantity) => {
+        if (!token) {
+            toast.error("Please sign in to update your cart", { autoClose: 1500 });
+            navigate('/login')
+            return;
+        }
+
         let cartData = structuredClone(cartItems);
         cartData[itemId][size] = quantity;
         setCartItems(cartData)
 
         if (token) {
             try {
-                await axios.put(backendUrl + "/api/cart", { itemId, size, quantity }, { headers: { token } })
+                const response = await axios.put(backendUrl + "/api/cart", { itemId, size, quantity }, { headers: { token } })
+                if (!response.data.success) {
+                    toast.error(response.data.message, { autoClose: 1500 })
+                }
             } catch (err) {
                 console.log(err.message)
-                toast.error(error.message)
+                toast.error(err.response?.data?.message || err.message)
             }
         }
     }
