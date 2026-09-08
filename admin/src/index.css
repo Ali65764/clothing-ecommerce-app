@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-neutral-50 font-sans text-neutral-900;
+  }
+
+  ::selection {
+    @apply bg-brand-200 text-brand-700;
+  }
+
+  :focus-visible {
+    outline: 2px solid #1e3a8a;
+    outline-offset: 2px;
+  }
+
+  
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+}
+
+.Toastify__toast {
+  font-family: inherit;
+  border-radius: 6px;
+}
