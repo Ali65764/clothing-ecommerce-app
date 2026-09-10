@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { ShopContext } from '../context/ShopContext';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -7,7 +7,7 @@ import { LockIcon } from '../components/ui/Icons';
 
 const Login = () => {
   const [currentState, setCurrentState] = useState("Login");
-  const { token, setToken, navigate, backendUrl } = useContext(ShopContext);
+  const { setToken, backendUrl } = useContext(ShopContext);
 
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -22,6 +22,7 @@ const Login = () => {
           toast.success("Account created, please sign in",{autoClose:1500})
           setCurrentState("Login")
           setName("")
+          setEmail("")
           setPassword("")
         } else {
           toast.error(response.data.message, { autoClose: 1500 })
@@ -41,16 +42,10 @@ const Login = () => {
     }
   }
 
-  useEffect(() => {
-    if (token) {
-      navigate("/")
-    }
-  }, [token])
-
   const isSignUp = currentState === "Sign Up"
 
   return (
-    <Container className='py-14'>
+    <Container className='min-h-screen flex items-center justify-center'>
       <form onSubmit={onSubmitHandler} className='mx-auto w-full max-w-sm rounded border border-neutral-200 bg-white shadow-sm p-6 sm:p-8'>
         <h1 className='text-2xl font-bold text-neutral-900'>{currentState}</h1>
         <p className='mt-1 text-sm text-neutral-600'>

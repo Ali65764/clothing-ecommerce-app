@@ -1,5 +1,5 @@
-import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import Home from "./pages/Home"
 import Collection from "./pages/Collection"
 import About from "./pages/About"
@@ -13,12 +13,26 @@ import NavBar from './components/NavBar'
 import Footer from './components/Footer'
 import SearchBar from './components/SearchBar'
 import ScrollToTop from './components/ScrollToTop'
+import { ShopContext } from './context/ShopContext'
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import Verify from './pages/Verify'
 
 const App = () => {
+  const { token } = useContext(ShopContext)
+
+  if (!token) {
+    return (
+      <div className='flex min-h-screen flex-col'>
+        <main className='flex-1'>
+          <Login />
+        </main>
+        <ToastContainer position='bottom-right' hideProgressBar theme='light' />
+      </div>
+    )
+  }
+
   return (
     <div className='flex min-h-screen flex-col'>
       <NavBar />
@@ -32,7 +46,7 @@ const App = () => {
           <Route path='/contact' element={<Contact />} />
           <Route path='/product/:productId' element={<Product />} />
           <Route path='/cart' element={<Cart />} />
-          <Route path='/login' element={<Login />} />
+          <Route path='/login' element={<Navigate to='/' replace />} />
           <Route path='/place-order' element={<PlaceOrder />} />
           <Route path='/orders' element={<Orders />} />
           <Route path='/verify' element={<Verify />} />
